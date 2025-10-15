@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/jpg"
+          href="https://upload.wikimedia.org/wikipedia/commons/d/de/Amazon_icon.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="header">
+    <div></div> <!-- Espacio en blanco a la izquierda -->
+
+    <!-- Logo del usuario -->
+    <img th:src="${logoUsuario}" align="left" alt="Logo Amazon" class="logo">
+
+    <!-- Nombre del usuario -->
+    <div class="nombre">
+        Hola <span>Usuario</span>
+    </div>
+</div>
+
+<div class="productos-container">
+    <h2>Listado de productos</h2>
+
+    <div class="productos-lista">
+        <!-- Iterar sobre la lista de productos -->
+        <div class="producto" th:each="producto : ${productos}">
+            <img th:src="${producto.imagen}" width="50" height="50" th:alt="${producto.nombre}">
+
+            <div class="producto-info">
+                <h3 th:text="${producto.nombre}">Nombre del producto</h3>
+
+                <p>
+                    Precio:
+                    <span th:text="${#numbers.formatDecimal(producto.precioFinal, 1, 2)}"></span>
+                    €
+                </p>
+
+                <form th:action="@{/gestion/PedidoServlet}" method="post">
+                    <input type="hidden" name="idProducto" th:value="${producto.id}">
+                    <button type="submit">Comprar ya</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
