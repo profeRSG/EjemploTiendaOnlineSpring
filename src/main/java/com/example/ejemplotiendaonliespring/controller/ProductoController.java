@@ -18,7 +18,7 @@ public class ProductoController {
     @GetMapping("/")
     public String mostrarFormulario(Model model) {
         model.addAttribute("productos", service.getProductos());//Obtenemos todos los productos
-        return "index"; // ← coincide con buscar.html
+        return "index"; //
     }
 
 
